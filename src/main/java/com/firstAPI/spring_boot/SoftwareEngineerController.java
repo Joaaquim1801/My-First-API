@@ -10,21 +10,15 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/software-engineers") // <- This creates the endpoint
 public class SoftwareEngineerController {
+    private SoftwareEngineerService softwareEngineerService;
+
+    public SoftwareEngineerController(SoftwareEngineerService softwareEngineerService) {
+        this.softwareEngineerService = softwareEngineerService;
+    }
 
     @GetMapping // GET request
     public List<SoftwareEngineer> getEngineers(){
-        return List.of(
-                new SoftwareEngineer(
-                        1,
-                        "James",
-                        List.of("Js","node","React", "Tailwindcss")
-                ),
-                new SoftwareEngineer(
-                        1,
-                        "Jamila",
-                        List.of("Java", "Springboot", "Spring")
-                )
-        );
+        return softwareEngineerService.getSoftwaresEngineers();
     }
 
 }
