@@ -19,4 +19,25 @@ public class SoftwareEngineerService {
         //return softwareEngineerRepository.findAll().stream().map();
         return softwareEngineerRepository.findAll();
     }
+    // no futuro tem que fazer verificações e um DAO
+    public void insertSoftwareEngineer(SoftwareEngineer softwareEngineer){
+        softwareEngineerRepository.save(softwareEngineer);
+    }
+
+    public SoftwareEngineer getSoftwareEngineerById(Integer id){
+        return softwareEngineerRepository.findById(id).orElseThrow(() -> new IllegalStateException(id+" not found"));
+    }
+
+    public void deleteSoftwareEngineerByid(Integer id){
+        softwareEngineerRepository.deleteById(id);
+    }
+
+    public void updateSoftwareEngineerById(Integer id,SoftwareEngineer NewSoftwareEngineer){
+        SoftwareEngineer engineer = getSoftwareEngineerById(id);
+
+        engineer.setName(NewSoftwareEngineer.getName());
+        engineer.setTechStack(NewSoftwareEngineer.getTechStack());
+
+        softwareEngineerRepository.save(engineer);
+    }
 }

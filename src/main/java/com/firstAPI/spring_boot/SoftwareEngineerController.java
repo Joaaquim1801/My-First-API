@@ -1,8 +1,6 @@
 package com.firstAPI.spring_boot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,6 +17,26 @@ public class SoftwareEngineerController {
     @GetMapping // GET request
     public List<SoftwareEngineer> getEngineers(){
         return softwareEngineerService.getSoftwaresEngineers();
+    }
+
+    @PostMapping // Post request
+    public void addNewSoftwareEngineer(@RequestBody SoftwareEngineer softwareEngineer){
+        softwareEngineerService.insertSoftwareEngineer(softwareEngineer);
+    } // @RequestBody map the JSON into a java class
+
+    @GetMapping("{id}") // GET request
+    public SoftwareEngineer getEngineersById(@PathVariable Integer id){
+        return softwareEngineerService.getSoftwareEngineerById(id);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteEngineersById(@PathVariable Integer id){
+        softwareEngineerService.deleteSoftwareEngineerByid(id);
+    }
+
+    @PutMapping("{id}")
+    public void updateEngineerById(@PathVariable Integer id, @RequestBody SoftwareEngineer softwareEngineer){
+        softwareEngineerService.updateSoftwareEngineerById(id,softwareEngineer);
     }
 
 }
